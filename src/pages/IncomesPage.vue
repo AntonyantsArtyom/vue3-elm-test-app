@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import IncomesTable from "@/entities/Incomes/IncomesTable.vue";
 import { getIncomes } from "@/shared/api/requests/getIncomes";
 import type { TIncome } from "@/shared/types/Income";
 import { onMounted, ref } from "vue";
@@ -12,7 +13,7 @@ onMounted(async () => {
 
 <template>
   Incomes
-  {{ JSON.stringify(incomes, null, 3) }}
+  <IncomesTable :incomes="incomes" />
 </template>
 
 <style scoped></style>

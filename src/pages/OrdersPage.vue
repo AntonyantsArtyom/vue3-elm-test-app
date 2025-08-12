@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { getOrders } from "@/shared/api/getOrders";
+import { getOrders } from "@/shared/api/requests/getOrders";
 import { onMounted, ref } from "vue";
 
 const orders = ref<any>(null);

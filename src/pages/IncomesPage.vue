@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { getIncomes } from "@/shared/api/getIncomes";
+import { getIncomes } from "@/shared/api/requests/getIncomes";
 import { onMounted, ref } from "vue";
 
 const incomes = ref<any>(null);

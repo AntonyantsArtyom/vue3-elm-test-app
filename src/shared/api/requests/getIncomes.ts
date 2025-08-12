@@ -1,4 +1,4 @@
-import baseApi from "./baseApi";
+import baseApi from "../baseApi";
 
 export async function getIncomes(dateFrom: string, dateTo: string, page?: number, limit?: number): Promise<any> {
   const { data } = await baseApi.get("/incomes", {

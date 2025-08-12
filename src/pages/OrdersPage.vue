@@ -2,18 +2,26 @@
 import { getOrders } from "@/entities/Orders/getOrders.api";
 import OrdersTable from "@/entities/Orders/OrdersTable.vue";
 import type { TOrder } from "@/entities/Orders/Order.types";
-import { onMounted, ref } from "vue";
+import { ref, watch } from "vue";
+import FiltersTemplate from "@/shared/FiltersTemplate.vue";
 
 const orders = ref<TOrder[]>([]);
+const date = ref(["", ""]);
 
-onMounted(async () => {
-  orders.value = await getOrders("2025-03-12", "2025-08-12", 1, 1);
-});
+watch(
+  date,
+  async () => {
+    if (!date.value[0] || !date.value[1]) return;
+    orders.value = await getOrders(date.value[0], date.value[1], 1, 10);
+  },
+  { immediate: true }
+);
 </script>
 
 <template>
-  Orders
-  <OrdersTable :orders="orders" />
+  <FiltersTemplate v-model:date="date">
+    <OrdersTable :orders="orders" />
+  </FiltersTemplate>
 </template>
 
 <style scoped></style>

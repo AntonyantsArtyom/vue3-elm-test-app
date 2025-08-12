@@ -36,7 +36,7 @@ defineProps<{
 
 <style scoped lang="scss">
 .orders-table {
-  height: calc(100dvh - 170px);
+  height: calc(100dvh - 210px);
 
   ::v-deep(.cell) {
     white-space: nowrap;

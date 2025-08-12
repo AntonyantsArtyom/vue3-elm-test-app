@@ -12,6 +12,7 @@ const orders = ref<TOrder[]>([]);
 const total = ref<number>(0);
 const page = ref<number>(1);
 const date = ref(["", ""]);
+const type = ref<"table" | "diagram">("table");
 
 watch(
   [date, page],
@@ -26,7 +27,7 @@ watch(
 </script>
 
 <template>
-  <FiltersTemplate v-model:date="date">
+  <FiltersTemplate v-model:date="date" v-model:type="type">
     <PaginationTemplate :pageSize="PAGE_SIZE" :total="total" v-model:page="page">
       <OrdersTable :orders="orders" />
     </PaginationTemplate>

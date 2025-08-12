@@ -4,11 +4,13 @@ import StocksTable from "@/entities/Stocks/StocksTable.vue";
 import PaginationTemplate from "@/shared/PaginationTemplate.vue";
 import type { TStock } from "@/entities/Stocks/Stock.types";
 import { ref, watch } from "vue";
+import FiltersTemplate from "@/shared/FiltersTemplate.vue";
 
 const PAGE_SIZE = 40;
 const stocks = ref<TStock[]>([]);
 const total = ref<number>(0);
 const page = ref<number>(1);
+const type = ref<"table" | "diagram">("table");
 
 const today = new Date().toISOString().split("T")[0];
 
@@ -24,9 +26,11 @@ watch(
 </script>
 
 <template>
-  <PaginationTemplate :pageSize="PAGE_SIZE" :total="total" v-model:page="page">
-    <StocksTable :stocks="stocks" />
-  </PaginationTemplate>
+  <FiltersTemplate v-model:type="type">
+    <PaginationTemplate :pageSize="PAGE_SIZE" :total="total" v-model:page="page">
+      <StocksTable :stocks="stocks" />
+    </PaginationTemplate>
+  </FiltersTemplate>
 </template>
 
 <style scoped></style>

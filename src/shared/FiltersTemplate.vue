@@ -1,19 +1,22 @@
 <script setup lang="ts">
 import { ref, defineEmits, watch } from "vue";
 
-const props = defineProps<{ date: string[]; type: string }>();
+const props = defineProps<{
+  date?: string[];
+  type: string;
+}>();
 
 const emit = defineEmits<{
   (e: "update:date", value: string[]): void;
   (e: "update:type", value: string): void;
 }>();
 
-const date = ref(props.date);
+const date = ref(props.date ?? ["", ""]);
 const type = ref(props.type);
 
 watch(
   () => props.date,
-  (propsTime) => (date.value = propsTime)
+  (propsTime) => (date.value = propsTime ?? ["", ""])
 );
 
 watch(
@@ -23,13 +26,11 @@ watch(
 
 function onDateChange(value: string[]) {
   date.value = value;
-
   if (!value || value.length === 0) {
     date.value = ["", ""];
     emit("update:date", ["", ""]);
     return;
   }
-
   emit(
     "update:date",
     value.map((d) => new Date(d).toISOString().split("T")[0])
@@ -45,7 +46,7 @@ function onTypeChange(value: string) {
 <template>
   <div id="filters-template">
     <div id="filters-container">
-      <div class="filters-element">
+      <div v-if="props.date" class="filters-element">
         <span id="filters-template-title">период: </span>
         <el-date-picker v-model="date" type="daterange" start-placeholder="начало" end-placeholder="конец" @change="onDateChange" />
       </div>
@@ -57,7 +58,7 @@ function onTypeChange(value: string) {
         </el-radio-group>
       </div>
     </div>
-    <slot v-if="date[0] && date[1]"></slot>
+    <slot v-if="!props.date || (date[0] && date[1])"></slot>
   </div>
 </template>
 

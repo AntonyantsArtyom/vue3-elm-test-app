@@ -37,7 +37,7 @@ defineProps<{
 
 <style scoped lang="scss">
 .stocks-table {
-  height: calc(100dvh - 170px);
+  height: calc(100dvh - 168px);
 
   ::v-deep(.cell) {
     white-space: nowrap;

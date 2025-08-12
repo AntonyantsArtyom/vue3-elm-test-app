@@ -1,7 +1,8 @@
+import type { TStock } from "@/shared/types/Stock";
 import baseApi from "../baseApi";
 
-export async function getStocks(dateFrom: string, page?: number, limit?: number): Promise<any> {
-  const { data } = await baseApi.get("/stocks", {
+export async function getStocks(dateFrom: string, page?: number, limit?: number) {
+  const { data } = await baseApi.get<{ data: TStock[] }>("/stocks", {
     params: { dateFrom, page, limit },
   });
 

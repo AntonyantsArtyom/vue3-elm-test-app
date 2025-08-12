@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { getStocks } from "@/shared/api/requests/getStocks";
+import type { TStock } from "@/shared/types/Stock";
 import { onMounted, ref } from "vue";
 
-const stocks = ref<any>(null);
+const stocks = ref<TStock[]>([]);
 
 onMounted(async () => {
   stocks.value = await getStocks("2025-08-12", 1, 1);

@@ -1,7 +1,8 @@
+import type { TOrder } from "@/shared/types/Order";
 import baseApi from "../baseApi";
 
-export async function getOrders(dateFrom: string, dateTo: string, page?: number, limit?: number): Promise<any> {
-  const { data } = await baseApi.get("/orders", {
+export async function getOrders(dateFrom: string, dateTo: string, page?: number, limit?: number) {
+  const { data } = await baseApi.get<{ data: TOrder[] }>("/orders", {
     params: { dateFrom, dateTo, page, limit },
   });
 

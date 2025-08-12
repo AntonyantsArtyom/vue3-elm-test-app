@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { getSales } from "@/shared/api/requests/getSales";
+import type { TSale } from "@/shared/types/Sale";
 import { onMounted, ref } from "vue";
 
-const sales = ref<any>(null);
+const sales = ref<TSale[]>([]);
 
 onMounted(async () => {
   sales.value = await getSales("2025-03-12", "2025-08-12", 1, 1);

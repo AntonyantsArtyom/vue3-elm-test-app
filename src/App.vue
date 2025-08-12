@@ -5,7 +5,6 @@ import AppTemplate from "@/shared/AppTemplate.vue";
 <template>
   <AppTemplate>
     <router-view />
-    <el-button>Default</el-button>
   </AppTemplate>
 </template>
 

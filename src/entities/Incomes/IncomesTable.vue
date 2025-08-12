@@ -26,7 +26,11 @@ defineProps<{ incomes: TIncome[] }>();
 </template>
 
 <style scoped lang="scss">
-.incomes-table ::v-deep(.cell) {
-  white-space: nowrap;
+.incomes-table {
+  height: calc(100dvh - 170px);
+
+  ::v-deep(.cell) {
+    white-space: nowrap;
+  }
 }
 </style>

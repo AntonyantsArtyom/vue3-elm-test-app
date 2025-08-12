@@ -2,18 +2,35 @@
 import IncomesTable from "@/entities/Incomes/IncomesTable.vue";
 import { getIncomes } from "@/entities/Incomes/getIncomes.api";
 import type { TIncome } from "@/entities/Incomes/Income.types";
-import { onMounted, ref } from "vue";
+import { ref, watch } from "vue";
+import FiltersTemplate from "@/shared/FiltersTemplate.vue";
+import PaginationTemplate from "@/shared/PaginationTemplate.vue";
+
+const PAGE_SIZE = 40;
 
 const incomes = ref<TIncome[]>([]);
+const total = ref<number>(0);
+const page = ref<number>(1);
+const date = ref(["", ""]);
 
-onMounted(async () => {
-  incomes.value = await getIncomes("2025-03-12", "2025-08-12", 1, 1);
-});
+watch(
+  [date, page],
+  async ([newDate, newPage]) => {
+    if (!newDate[0] || !newDate[1]) return;
+    const { data, lastPage } = await getIncomes(newDate[0], newDate[1], newPage, PAGE_SIZE);
+    incomes.value = data;
+    total.value = lastPage;
+  },
+  { immediate: true }
+);
 </script>
 
 <template>
-  Incomes
-  <IncomesTable :incomes="incomes" />
+  <FiltersTemplate v-model:date="date">
+    <PaginationTemplate :pageSize="PAGE_SIZE" :total="total" v-model:page="page">
+      <IncomesTable :incomes="incomes" />
+    </PaginationTemplate>
+  </FiltersTemplate>
 </template>
 
 <style scoped></style>

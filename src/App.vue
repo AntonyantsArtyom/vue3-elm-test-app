@@ -3,7 +3,9 @@ import AppTemplate from "@/shared/AppTemplate.vue";
 </script>
 
 <template>
-  <AppTemplate>HELLO WORLD</AppTemplate>
+  <AppTemplate>
+    <router-view />
+  </AppTemplate>
 </template>
 
 <style>

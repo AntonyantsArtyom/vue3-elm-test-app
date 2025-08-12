@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import StocksTable from "@/entities/Stocks/StocksTable.vue";
 import { getStocks } from "@/shared/api/requests/getStocks";
 import type { TStock } from "@/shared/types/Stock";
 import { onMounted, ref } from "vue";
@@ -12,7 +13,7 @@ onMounted(async () => {
 
 <template>
   Stocks
-  {{ JSON.stringify(stocks, null, 3) }}
+  <StocksTable :stocks="stocks" />
 </template>
 
 <style scoped></style>

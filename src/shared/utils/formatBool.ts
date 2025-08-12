@@ -1,3 +1,3 @@
-export const formatBool = (row: object, column: boolean, cellValue: boolean) => {
+export const formatBool = (_row: object, _column: boolean, cellValue: boolean) => {
   return cellValue ? "Да" : "Нет";
 };

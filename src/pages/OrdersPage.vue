@@ -4,15 +4,22 @@ import OrdersTable from "@/entities/Orders/OrdersTable.vue";
 import type { TOrder } from "@/entities/Orders/Order.types";
 import { ref, watch } from "vue";
 import FiltersTemplate from "@/shared/FiltersTemplate.vue";
+import PaginationTemplate from "@/shared/PaginationTemplate.vue";
+
+const PAGE_SIZE = 40;
 
 const orders = ref<TOrder[]>([]);
+const total = ref<number>(0);
+const page = ref<number>(1);
 const date = ref(["", ""]);
 
 watch(
-  date,
-  async () => {
-    if (!date.value[0] || !date.value[1]) return;
-    orders.value = await getOrders(date.value[0], date.value[1], 1, 40);
+  [date, page],
+  async ([newDate, newPage]) => {
+    if (!newDate[0] || !newDate[1]) return;
+    const { data, lastPage } = await getOrders(newDate[0], newDate[1], newPage, PAGE_SIZE);
+    orders.value = data;
+    total.value = lastPage;
   },
   { immediate: true }
 );
@@ -20,7 +27,9 @@ watch(
 
 <template>
   <FiltersTemplate v-model:date="date">
-    <OrdersTable :orders="orders" />
+    <PaginationTemplate :pageSize="PAGE_SIZE" :total="total" v-model:page="page">
+      <OrdersTable :orders="orders" />
+    </PaginationTemplate>
   </FiltersTemplate>
 </template>
 

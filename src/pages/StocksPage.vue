@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { getStocks } from "@/entities/Stocks/getStocks";
 import StocksTable from "@/entities/Stocks/StocksTable.vue";
-import type { TStock } from "@/shared/types/Stock";
+import type { TStock } from "@/entities/Stocks/Stock.types";
 import { onMounted, ref } from "vue";
 
 const stocks = ref<TStock[]>([]);

@@ -1,4 +1,4 @@
-import type { TSale } from "@/shared/types/Sale";
+import type { TSale } from "@/entities/Sales/Sale.types";
 import baseApi from "@/shared/api/baseApi";
 
 export async function getSales(dateFrom: string, dateTo: string, page?: number, limit?: number) {

@@ -1,4 +1,4 @@
-import type { TOrder } from "@/shared/types/Order";
+import type { TOrder } from "@/entities/Orders/Order.types";
 import baseApi from "@/shared/api/baseApi";
 
 export async function getOrders(dateFrom: string, dateTo: string, page?: number, limit?: number) {

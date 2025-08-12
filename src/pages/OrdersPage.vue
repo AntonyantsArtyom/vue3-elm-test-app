@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { getOrders } from "@/entities/Orders/getOrders";
 import OrdersTable from "@/entities/Orders/OrdersTable.vue";
-import type { TOrder } from "@/shared/types/Order";
+import type { TOrder } from "@/entities/Orders/Order.types";
 import { onMounted, ref } from "vue";
 
 const orders = ref<TOrder[]>([]);

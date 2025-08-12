@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { TOrder } from "@/shared/types/Order";
+import type { TOrder } from "@/entities/Orders/Order.types";
 import { formatBool } from "@/shared/utils/formatBool";
 
 defineProps<{

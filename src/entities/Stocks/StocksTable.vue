@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { TStock } from "@/shared/types/Stock";
+import type { TStock } from "@/entities/Stocks/Stock.types";
 import { formatBool } from "@/shared/utils/formatBool";
 
 defineProps<{

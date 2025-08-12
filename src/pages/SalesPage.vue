@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import SalesTable from "@/entities/Sales/SalesTable.vue";
 import { getSales } from "@/entities/Sales/getSales";
-import type { TSale } from "@/shared/types/Sale";
+import type { TSale } from "@/entities/Sales/Sale.types";
 import { onMounted, ref } from "vue";
 
 const sales = ref<TSale[]>([]);

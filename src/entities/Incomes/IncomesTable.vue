@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { TIncome } from "@/shared/types/Income";
+import type { TIncome } from "@/entities/Incomes/Income.types";
 
 defineProps<{ incomes: TIncome[] }>();
 </script>

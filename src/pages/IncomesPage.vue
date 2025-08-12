@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import IncomesTable from "@/entities/Incomes/IncomesTable.vue";
 import { getIncomes } from "@/entities/Incomes/getIncomes";
-import type { TIncome } from "@/shared/types/Income";
+import type { TIncome } from "@/entities/Incomes/Income.types";
 import { onMounted, ref } from "vue";
 
 const incomes = ref<TIncome[]>([]);

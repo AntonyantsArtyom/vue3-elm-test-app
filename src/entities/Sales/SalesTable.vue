@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { TSale } from "@/shared/types/Sale";
+import type { TSale } from "@/entities/Sales/Sale.types";
 import { formatBool } from "@/shared/utils/formatBool";
 
 defineProps<{

@@ -1,4 +1,4 @@
-import type { TStock } from "@/shared/types/Stock";
+import type { TStock } from "@/entities/Stocks/Stock.types";
 import baseApi from "@/shared/api/baseApi";
 
 export async function getStocks(dateFrom: string, page?: number, limit?: number) {

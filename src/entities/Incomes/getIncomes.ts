@@ -1,4 +1,4 @@
-import type { TIncome } from "@/shared/types/Income";
+import type { TIncome } from "@/entities/Incomes/Income.types";
 import baseApi from "@/shared/api/baseApi";
 
 export async function getIncomes(dateFrom: string, dateTo: string, page?: number, limit?: number) {

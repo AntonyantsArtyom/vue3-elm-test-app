@@ -2,18 +2,35 @@
 import SalesTable from "@/entities/Sales/SalesTable.vue";
 import { getSales } from "@/entities/Sales/getSales.api";
 import type { TSale } from "@/entities/Sales/Sale.types";
-import { onMounted, ref } from "vue";
+import { ref, watch } from "vue";
+import FiltersTemplate from "@/shared/FiltersTemplate.vue";
+import PaginationTemplate from "@/shared/PaginationTemplate.vue";
+
+const PAGE_SIZE = 40;
 
 const sales = ref<TSale[]>([]);
+const total = ref<number>(0);
+const page = ref<number>(1);
+const date = ref(["", ""]);
 
-onMounted(async () => {
-  sales.value = await getSales("2025-03-12", "2025-08-12", 1, 3);
-});
+watch(
+  [date, page],
+  async ([newDate, newPage]) => {
+    if (!newDate[0] || !newDate[1]) return;
+    const { data, lastPage } = await getSales(newDate[0], newDate[1], newPage, PAGE_SIZE);
+    sales.value = data;
+    total.value = lastPage;
+  },
+  { immediate: true }
+);
 </script>
 
 <template>
-  Sales
-  <SalesTable :sales="sales" />
+  <FiltersTemplate v-model:date="date">
+    <PaginationTemplate :pageSize="PAGE_SIZE" :total="total" v-model:page="page">
+      <SalesTable :sales="sales" />
+    </PaginationTemplate>
+  </FiltersTemplate>
 </template>
 
 <style scoped></style>

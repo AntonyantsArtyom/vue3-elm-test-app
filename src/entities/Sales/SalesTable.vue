@@ -45,6 +45,8 @@ defineProps<{
 
 <style scoped lang="scss">
 .sales-table {
+  height: calc(100dvh - 170px);
+
   ::v-deep(.cell) {
     white-space: nowrap;
   }

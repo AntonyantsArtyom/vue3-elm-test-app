@@ -1,7 +1,22 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import type { TabsPaneContext } from "element-plus";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+const handleClick = (tab: TabsPaneContext) => {
+  router.push({ name: String(tab.paneName || "") });
+};
+</script>
 
 <template>
   <div id="app-template">
+    <el-tabs class="demo-tabs" @tab-click="handleClick">
+      <el-tab-pane label="Доходы" name="incomes" />
+      <el-tab-pane label="Заказы" name="orders" />
+      <el-tab-pane label="Продажи" name="sales" />
+      <el-tab-pane label="Склады" name="stocks" />
+    </el-tabs>
     <slot></slot>
   </div>
 </template>

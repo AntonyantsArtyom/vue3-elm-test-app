@@ -9,11 +9,11 @@ const routes = [
   {
     path: "/",
     children: [
-      { path: "incomes", component: IncomesPage },
-      { path: "orders", component: OrdersPage },
-      { path: "sales", component: SalesPage },
-      { path: "stocks", component: StocksPage },
-      { path: "", redirect: "/incomes" },
+      { path: "incomes", name: "incomes", component: IncomesPage },
+      { path: "orders", name: "orders", component: OrdersPage },
+      { path: "sales", name: "sales", component: SalesPage },
+      { path: "stocks", name: "stocks", component: StocksPage },
+      { path: "", redirect: "incomes" },
     ],
   },
 ];

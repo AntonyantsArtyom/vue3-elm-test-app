@@ -1,5 +1,16 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import AppTemplate from "@/shared/AppTemplate.vue";
+</script>
 
-<template>HELLO WORLD</template>
+<template>
+  <AppTemplate>HELLO WORLD</AppTemplate>
+</template>
 
-<style scoped></style>
+<style>
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+</style>

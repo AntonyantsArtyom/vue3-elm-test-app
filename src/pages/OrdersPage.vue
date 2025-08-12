@@ -12,7 +12,7 @@ watch(
   date,
   async () => {
     if (!date.value[0] || !date.value[1]) return;
-    orders.value = await getOrders(date.value[0], date.value[1], 1, 10);
+    orders.value = await getOrders(date.value[0], date.value[1], 1, 40);
   },
   { immediate: true }
 );

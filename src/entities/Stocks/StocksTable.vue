@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { TStock } from "@/shared/types/Stock";
+import { formatBool } from "@/shared/utils/formatBool";
 
 defineProps<{
   stocks: TStock[];
@@ -14,8 +15,8 @@ defineProps<{
     <el-table-column prop="tech_size" label="Технический&nbsp;размер" />
     <el-table-column prop="barcode" label="Штрихкод" />
     <el-table-column prop="quantity" label="Количество" />
-    <el-table-column prop="is_supply" label="Поставка" :formatter="(isTrue: boolean) => (isTrue ? 'Да' : 'Нет')" />
-    <el-table-column prop="is_realization" label="Реализация" :formatter="(isTrue: boolean) => (isTrue ? 'Да' : 'Нет')" />
+    <el-table-column prop="is_supply" label="Поставка" :formatter="formatBool" />
+    <el-table-column prop="is_realization" label="Реализация" :formatter="formatBool" />
     <el-table-column prop="quantity_full" label="Полное&nbsp;количество" />
     <el-table-column prop="warehouse_name" label="Склад" />
     <el-table-column prop="in_way_to_client" label="В&nbsp;пути&nbsp;к&nbsp;клиенту" />

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import OrdersTable from "@/entities/Orders/OrdersTable.vue";
 import { getOrders } from "@/shared/api/requests/getOrders";
 import type { TOrder } from "@/shared/types/Order";
 import { onMounted, ref } from "vue";
@@ -12,7 +13,7 @@ onMounted(async () => {
 
 <template>
   Orders
-  {{ JSON.stringify(orders, null, 3) }}
+  <OrdersTable :orders="orders" />
 </template>
 
 <style scoped></style>

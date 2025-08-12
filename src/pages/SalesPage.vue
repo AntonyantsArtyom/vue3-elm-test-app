@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import SalesTable from "@/entities/Sales/SalesTable.vue";
-import { getSales } from "@/shared/api/requests/getSales";
+import { getSales } from "@/entities/Sales/getSales";
 import type { TSale } from "@/shared/types/Sale";
 import { onMounted, ref } from "vue";
 

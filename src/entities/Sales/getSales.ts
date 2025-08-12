@@ -1,5 +1,5 @@
 import type { TSale } from "@/shared/types/Sale";
-import baseApi from "../baseApi";
+import baseApi from "@/shared/api/baseApi";
 
 export async function getSales(dateFrom: string, dateTo: string, page?: number, limit?: number) {
   const { data } = await baseApi.get<{ data: TSale[] }>("/sales", {

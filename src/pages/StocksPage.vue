@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import { getStocks } from "@/entities/Stocks/getStocks";
 import StocksTable from "@/entities/Stocks/StocksTable.vue";
-import { getStocks } from "@/shared/api/requests/getStocks";
 import type { TStock } from "@/shared/types/Stock";
 import { onMounted, ref } from "vue";
 

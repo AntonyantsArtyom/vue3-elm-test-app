@@ -6,6 +6,7 @@ import { ref, watch } from "vue";
 import FiltersTemplate from "@/shared/components/FiltersTemplate.vue";
 import PaginationTemplate from "@/shared/components/PaginationTemplate.vue";
 import OrdersDiagrams from "@/entities/Orders/OrdersDiagrams.vue";
+import { ElLoading } from "element-plus";
 
 const PAGE_SIZE = 35;
 
@@ -19,9 +20,17 @@ watch(
   [date, page],
   async ([newDate, newPage]) => {
     if (!newDate[0] || !newDate[1]) return;
-    const { data, lastPage } = await getOrders(newDate[0], newDate[1], newPage, PAGE_SIZE);
-    orders.value = data;
-    total.value = lastPage;
+    const loading = ElLoading.service({
+      lock: true,
+    });
+    try {
+      const { data, lastPage } = await getOrders(newDate[0], newDate[1], newPage, PAGE_SIZE);
+      orders.value = data;
+      total.value = lastPage;
+    } catch (error) {
+    } finally {
+      loading.close();
+    }
   },
   { immediate: true }
 );

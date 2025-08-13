@@ -6,6 +6,7 @@ import type { TStock } from "@/entities/Stocks/Stock.types";
 import { ref, watch } from "vue";
 import FiltersTemplate from "@/shared/components/FiltersTemplate.vue";
 import StocksDiagrams from "@/entities/Stocks/StocksDiagrams.vue";
+import { ElLoading } from "element-plus";
 
 const PAGE_SIZE = 40;
 const stocks = ref<TStock[]>([]);
@@ -18,9 +19,17 @@ const today = new Date().toISOString().split("T")[0];
 watch(
   page,
   async (newPage) => {
-    const { data, lastPage } = await getStocks(today, newPage, PAGE_SIZE);
-    stocks.value = data;
-    total.value = lastPage;
+    const loading = ElLoading.service({
+      lock: true,
+    });
+    try {
+      const { data, lastPage } = await getStocks(today, newPage, PAGE_SIZE);
+      stocks.value = data;
+      total.value = lastPage;
+    } catch (error) {
+    } finally {
+      loading.close();
+    }
   },
   { immediate: true }
 );

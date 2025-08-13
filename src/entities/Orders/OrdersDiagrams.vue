@@ -77,7 +77,7 @@ const chartOptions = computed(() => ({
 
 <template>
   <div class="charts-grid">
-    <span class="charts-title">Количество записей по складам</span>
+    <span class="charts-title">Количество заказов по времени</span>
     <el-scrollbar>
       <VChart v-if="ordersByHour.length" class="chart" :option="chartOptions" autoresize />
     </el-scrollbar>

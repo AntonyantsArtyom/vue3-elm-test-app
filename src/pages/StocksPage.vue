@@ -5,6 +5,7 @@ import PaginationTemplate from "@/shared/PaginationTemplate.vue";
 import type { TStock } from "@/entities/Stocks/Stock.types";
 import { ref, watch } from "vue";
 import FiltersTemplate from "@/shared/FiltersTemplate.vue";
+import StocksDiagrams from "@/entities/Stocks/StocksDiagrams.vue";
 
 const PAGE_SIZE = 40;
 const stocks = ref<TStock[]>([]);
@@ -28,7 +29,8 @@ watch(
 <template>
   <FiltersTemplate v-model:type="type">
     <PaginationTemplate :pageSize="PAGE_SIZE" :total="total" v-model:page="page">
-      <StocksTable :stocks="stocks" />
+      <StocksTable v-if="type === 'table'" :stocks="stocks" />
+      <StocksDiagrams v-else :stocks="stocks" />
     </PaginationTemplate>
   </FiltersTemplate>
 </template>

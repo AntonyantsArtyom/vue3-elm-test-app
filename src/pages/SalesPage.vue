@@ -5,6 +5,7 @@ import type { TSale } from "@/entities/Sales/Sale.types";
 import { ref, watch } from "vue";
 import FiltersTemplate from "@/shared/FiltersTemplate.vue";
 import PaginationTemplate from "@/shared/PaginationTemplate.vue";
+import SalesDiagrams from "@/entities/Sales/SalesDiagrams.vue";
 
 const PAGE_SIZE = 40;
 
@@ -29,7 +30,8 @@ watch(
 <template>
   <FiltersTemplate v-model:date="date" v-model:type="type">
     <PaginationTemplate :pageSize="PAGE_SIZE" :total="total" v-model:page="page">
-      <SalesTable :sales="sales" />
+      <SalesTable v-if="type === 'table'" :sales="sales" />
+      <SalesDiagrams v-else :sales="sales" />
     </PaginationTemplate>
   </FiltersTemplate>
 </template>

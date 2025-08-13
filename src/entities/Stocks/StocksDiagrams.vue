@@ -5,6 +5,7 @@ import { use } from "echarts/core";
 import { CanvasRenderer } from "echarts/renderers";
 import { PieChart } from "echarts/charts";
 import { TitleComponent, TooltipComponent, LegendComponent } from "echarts/components";
+import { pieOptions } from "@/shared/utils/pieOptions";
 import VChart from "vue-echarts";
 
 use([CanvasRenderer, PieChart, TitleComponent, TooltipComponent, LegendComponent]);
@@ -38,23 +39,6 @@ function getWarehouseDataInWay() {
 const quantityData = computed(() => getWarehouseData("quantity"));
 const inWayData = computed(() => getWarehouseDataInWay());
 const quantityFullData = computed(() => getWarehouseData("quantity_full"));
-
-function pieOptions(title: string, data: { name: string; value: number }[]) {
-  return {
-    title: { text: title, left: "center" },
-    tooltip: { trigger: "item" },
-    legend: { bottom: 0 },
-    series: [
-      {
-        type: "pie",
-        radius: "50%",
-        data,
-        label: { show: false },
-        labelLine: { show: false },
-      },
-    ],
-  };
-}
 </script>
 
 <template>

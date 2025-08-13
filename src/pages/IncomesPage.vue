@@ -7,6 +7,7 @@ import FiltersTemplate from "@/shared/components/FiltersTemplate.vue";
 import PaginationTemplate from "@/shared/components/PaginationTemplate.vue";
 import { ElLoading } from "element-plus";
 import dayjs from "dayjs";
+import IncomesDiagrams from "@/entities/Incomes/IncomesDiagrams.vue";
 
 const PAGE_SIZE = 40;
 
@@ -48,7 +49,8 @@ watch(
 <template>
   <FiltersTemplate ref="filtersRef">
     <PaginationTemplate :pageSize="PAGE_SIZE" :total="total" v-model:page="page">
-      <IncomesTable :incomes="incomes" />
+      <IncomesTable v-if="filtersRef?.type === 'table'" :incomes="incomes" />
+      <IncomesDiagrams v-else :incomes="incomes" />
     </PaginationTemplate>
   </FiltersTemplate>
 </template>

@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { getStocks } from "@/entities/Stocks/getStocks.api";
 import StocksTable from "@/entities/Stocks/StocksTable.vue";
-import PaginationTemplate from "@/shared/PaginationTemplate.vue";
+import PaginationTemplate from "@/shared/components/PaginationTemplate.vue";
 import type { TStock } from "@/entities/Stocks/Stock.types";
 import { ref, watch } from "vue";
-import FiltersTemplate from "@/shared/FiltersTemplate.vue";
+import FiltersTemplate from "@/shared/components/FiltersTemplate.vue";
 import StocksDiagrams from "@/entities/Stocks/StocksDiagrams.vue";
 
 const PAGE_SIZE = 40;

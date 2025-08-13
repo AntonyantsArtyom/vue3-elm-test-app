@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import AppTemplate from "@/shared/AppTemplate.vue";
+import AppTemplate from "@/shared/components/AppTemplate.vue";
 </script>
 
 <template>

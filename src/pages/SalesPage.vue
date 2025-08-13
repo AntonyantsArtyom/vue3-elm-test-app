@@ -3,8 +3,8 @@ import SalesTable from "@/entities/Sales/SalesTable.vue";
 import { getSales } from "@/entities/Sales/getSales.api";
 import type { TSale } from "@/entities/Sales/Sale.types";
 import { ref, watch } from "vue";
-import FiltersTemplate from "@/shared/FiltersTemplate.vue";
-import PaginationTemplate from "@/shared/PaginationTemplate.vue";
+import FiltersTemplate from "@/shared/components/FiltersTemplate.vue";
+import PaginationTemplate from "@/shared/components/PaginationTemplate.vue";
 import SalesDiagrams from "@/entities/Sales/SalesDiagrams.vue";
 
 const PAGE_SIZE = 40;

@@ -3,8 +3,8 @@ import IncomesTable from "@/entities/Incomes/IncomesTable.vue";
 import { getIncomes } from "@/entities/Incomes/getIncomes.api";
 import type { TIncome } from "@/entities/Incomes/Income.types";
 import { ref, watch } from "vue";
-import FiltersTemplate from "@/shared/FiltersTemplate.vue";
-import PaginationTemplate from "@/shared/PaginationTemplate.vue";
+import FiltersTemplate from "@/shared/components/FiltersTemplate.vue";
+import PaginationTemplate from "@/shared/components/PaginationTemplate.vue";
 
 const PAGE_SIZE = 40;
 

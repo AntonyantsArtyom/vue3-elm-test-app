@@ -3,8 +3,8 @@ import { getOrders } from "@/entities/Orders/getOrders.api";
 import OrdersTable from "@/entities/Orders/OrdersTable.vue";
 import type { TOrder } from "@/entities/Orders/Order.types";
 import { ref, watch } from "vue";
-import FiltersTemplate from "@/shared/FiltersTemplate.vue";
-import PaginationTemplate from "@/shared/PaginationTemplate.vue";
+import FiltersTemplate from "@/shared/components/FiltersTemplate.vue";
+import PaginationTemplate from "@/shared/components/PaginationTemplate.vue";
 import OrdersDiagrams from "@/entities/Orders/OrdersDiagrams.vue";
 
 const PAGE_SIZE = 35;

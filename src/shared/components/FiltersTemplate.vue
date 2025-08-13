@@ -81,6 +81,7 @@ function onTypeChange(value: string) {
       width: 225px;
       margin: 0px;
       margin-top: 10px;
+      font-size: 16px;
     }
 
     .filters-message-icon {

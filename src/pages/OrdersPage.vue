@@ -5,8 +5,9 @@ import type { TOrder } from "@/entities/Orders/Order.types";
 import { ref, watch } from "vue";
 import FiltersTemplate from "@/shared/FiltersTemplate.vue";
 import PaginationTemplate from "@/shared/PaginationTemplate.vue";
+import OrdersDiagrams from "@/entities/Orders/OrdersDiagrams.vue";
 
-const PAGE_SIZE = 40;
+const PAGE_SIZE = 35;
 
 const orders = ref<TOrder[]>([]);
 const total = ref<number>(0);
@@ -29,7 +30,8 @@ watch(
 <template>
   <FiltersTemplate v-model:date="date" v-model:type="type">
     <PaginationTemplate :pageSize="PAGE_SIZE" :total="total" v-model:page="page">
-      <OrdersTable :orders="orders" />
+      <OrdersTable v-if="type === 'table'" :orders="orders" />
+      <OrdersDiagrams v-else :orders="orders" />
     </PaginationTemplate>
   </FiltersTemplate>
 </template>

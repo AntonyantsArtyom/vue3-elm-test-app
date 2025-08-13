@@ -13,7 +13,7 @@ function handlePageChange(newPage: number) {
 <template>
   <div class="pagination-template">
     <slot></slot>
-    <el-pagination :page-size="pageSize" :pager-count="9" layout="prev, pager, next" :total="total" :current-page="page" @current-change="handlePageChange" />
+    <el-pagination :page-size="pageSize" :pager-count="5" layout="prev, pager, next" :total="total" :current-page="page" @current-change="handlePageChange" />
   </div>
 </template>
 

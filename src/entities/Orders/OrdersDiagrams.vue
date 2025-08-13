@@ -56,7 +56,6 @@ const ordersByHour = computed(() => {
 });
 
 const chartOptions = computed(() => ({
-  title: { text: "Количество заказов по часам", left: "center" },
   tooltip: { trigger: "axis" },
   grid: { left: "3%", right: "3%", bottom: "3%", containLabel: true },
   xAxis: {
@@ -78,6 +77,7 @@ const chartOptions = computed(() => ({
 
 <template>
   <div class="charts-grid">
+    <span class="charts-title">Количество записей по складам</span>
     <el-scrollbar>
       <VChart v-if="ordersByHour.length" class="chart" :option="chartOptions" autoresize />
     </el-scrollbar>
@@ -91,13 +91,23 @@ const chartOptions = computed(() => ({
   display: flex;
   flex-direction: column;
 
+  .charts-title {
+    margin: 0;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 18px;
+    color: var(--el-text-color-primary);
+  }
+
   .el-alert {
     margin-top: auto;
   }
 
   .chart {
-    width: 900px;
-    height: 400px;
+    width: 100%;
+    height: 100%;
+    min-width: 900px;
+    min-height: 400px;
   }
 }
 </style>

@@ -1,8 +1,19 @@
 <script setup lang="ts">
 import type { TabsPaneContext } from "element-plus";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
+import { ref, watch } from "vue";
 
 const router = useRouter();
+const route = useRoute();
+
+const activeTab = ref(String(route.name || ""));
+
+watch(
+  () => route.name,
+  (newName) => {
+    activeTab.value = String(newName || "");
+  }
+);
 
 const handleClick = (tab: TabsPaneContext) => {
   router.push({ name: String(tab.paneName || "") });
@@ -11,7 +22,7 @@ const handleClick = (tab: TabsPaneContext) => {
 
 <template>
   <div id="app-template">
-    <el-tabs class="demo-tabs" @tab-click="handleClick">
+    <el-tabs v-model="activeTab" class="app-tabs" @tab-click="handleClick">
       <el-tab-pane label="Доходы" name="incomes" />
       <el-tab-pane label="Заказы" name="orders" />
       <el-tab-pane label="Продажи" name="sales" />

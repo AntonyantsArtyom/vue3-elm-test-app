@@ -16,7 +16,7 @@ watch(
 );
 
 const handleClick = (tab: TabsPaneContext) => {
-  router.push({ name: String(tab.paneName || "") });
+  router.push({ name: String(tab.paneName || ""), query: { ...route.query } });
 };
 </script>
 

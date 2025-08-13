@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, defineEmits, watch } from "vue";
+import { Calendar } from "@element-plus/icons-vue";
 
 const props = defineProps<{
   date?: string[];
@@ -59,11 +60,35 @@ function onTypeChange(value: string) {
       </div>
     </div>
     <slot v-if="!props.date || (date[0] && date[1])"></slot>
+    <div v-else class="filters-message">
+      <Calendar class="filters-message-icon" />
+      <h4 class="filters-message-title">установите временной период для отображения данных</h4>
+    </div>
   </div>
 </template>
 
 <style scoped lang="scss">
 #filters-template {
+  .filters-message {
+    width: 305px;
+    color: var(--el-text-color-secondary);
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .filters-message-title {
+      width: 225px;
+      margin: 0px;
+      margin-top: 10px;
+    }
+
+    .filters-message-icon {
+      width: 100px;
+      height: 100px;
+    }
+  }
+
   #filters-container {
     margin-bottom: 10px;
     display: grid;

@@ -1,23 +1,19 @@
 <script setup lang="ts">
-import { ref, defineEmits, watch, onMounted } from "vue";
+import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { Calendar } from "@element-plus/icons-vue";
-
-const props = defineProps<{
-  date?: string[];
-  type: string;
-}>();
-
-const emit = defineEmits<{
-  (e: "update:date", value: string[]): void;
-  (e: "update:type", value: string): void;
-}>();
+import dayjs from "dayjs";
 
 const route = useRoute();
 const router = useRouter();
 
-const date = ref(props.date ?? ["", ""]);
-const type = ref(props.type);
+const date = ref<string[] | null | undefined>(null);
+const type = ref<string>("table");
+defineExpose({ date, type });
+
+defineProps<{
+  noDate?: boolean;
+}>();
 
 onMounted(() => {
   const queryDate = route.query.date as string | undefined;
@@ -25,44 +21,30 @@ onMounted(() => {
 
   if (queryDate) {
     date.value = queryDate.split(",");
-    emit("update:date", date.value);
   }
 
   if (queryType) {
     type.value = queryType;
-    emit("update:type", type.value);
   }
 });
-
-watch(
-  () => props.date,
-  (propsTime) => (date.value = propsTime ?? ["", ""])
-);
-
-watch(
-  () => props.type,
-  (propsType) => (type.value = propsType)
-);
 
 function updateUrl() {
   router.replace({
     query: {
       ...route.query,
-      date: date.value.map((d) => new Date(d).toISOString().split("T")[0]).join(","),
+      date: date.value && date.value?.length ? date.value.map((d) => dayjs(new Date(d)).format("YYYY-MM-DD")).join(",") : undefined,
       type: type.value,
     },
   });
 }
 
-function onDateChange(value: string[]) {
-  date.value = value.length ? value : ["", ""];
-  emit("update:date", value.length ? value.map((d) => new Date(d).toISOString().split("T")[0]) : ["", ""]);
+function onDateChange(value: string[] | null) {
+  date.value = value;
   updateUrl();
 }
 
 function onTypeChange(value: string) {
   type.value = value;
-  emit("update:type", value);
   updateUrl();
 }
 </script>
@@ -70,7 +52,7 @@ function onTypeChange(value: string) {
 <template>
   <div id="filters-template">
     <div id="filters-container">
-      <div v-if="props.date" class="filters-element">
+      <div v-if="!noDate" class="filters-element">
         <span id="filters-template-title">период: </span>
         <el-date-picker v-model="date" type="daterange" start-placeholder="начало" end-placeholder="конец" @change="onDateChange" />
       </div>
@@ -82,7 +64,7 @@ function onTypeChange(value: string) {
         </el-radio-group>
       </div>
     </div>
-    <slot v-if="!props.date || (date[0] && date[1])"></slot>
+    <slot v-if="date && date[0] && date[1]"></slot>
     <div v-else class="filters-message">
       <Calendar class="filters-message-icon" />
       <h4 class="filters-message-title">установите временной период для отображения данных</h4>

@@ -50,11 +50,13 @@ const salesSumByCountry = computed(() => {
 
 <template>
   <div class="charts-grid">
-    <div class="charts">
-      <VChart v-if="salesCountByWarehouse.length" class="chart" :option="pieOptions('кол-во продаж по складам', salesCountByWarehouse)" autoresize />
-      <VChart v-if="salesSumByWarehouse.length" class="chart" :option="pieOptions('сумма продаж по складам', salesSumByWarehouse)" autoresize />
-      <VChart v-if="salesSumByCountry.length" class="chart" :option="pieOptions('сумма продаж по странам', salesSumByCountry)" autoresize />
-    </div>
+    <el-scrollbar>
+      <div class="charts">
+        <VChart v-if="salesCountByWarehouse.length" class="chart" :option="pieOptions('кол-во продаж по складам', salesCountByWarehouse)" autoresize />
+        <VChart v-if="salesSumByWarehouse.length" class="chart" :option="pieOptions('сумма продаж по складам', salesSumByWarehouse)" autoresize />
+        <VChart v-if="salesSumByCountry.length" class="chart" :option="pieOptions('сумма продаж по странам', salesSumByCountry)" autoresize />
+      </div>
+    </el-scrollbar>
     <el-alert title="Статистика формируется по конкретной странице таблицы, а не всему периоду" type="warning" show-icon :closable="false" />
   </div>
 </template>

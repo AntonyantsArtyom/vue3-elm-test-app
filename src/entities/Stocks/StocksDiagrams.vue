@@ -43,11 +43,12 @@ const quantityFullData = computed(() => getWarehouseData("quantity_full"));
 
 <template>
   <div class="charts-grid">
-    <div class="charts">
-      <VChart v-if="quantityFullData.length" class="chart" :option="pieOptions('количество продукции', quantityFullData)" autoresize />
-      <VChart v-if="quantityData.length" class="chart" :option="pieOptions('на складе', quantityData)" autoresize />
-      <VChart v-if="inWayData.length" class="chart" :option="pieOptions('в пути', inWayData)" autoresize />
-    </div>
+    <el-scrollbar>
+      <div class="charts">
+        <VChart v-if="quantityFullData.length" class="chart" :option="pieOptions('количество продукции', quantityFullData)" autoresize />
+        <VChart v-if="quantityData.length" class="chart" :option="pieOptions('на складе', quantityData)" autoresize />
+        <VChart v-if="inWayData.length" class="chart" :option="pieOptions('в пути', inWayData)" autoresize /></div
+    ></el-scrollbar>
     <el-alert title="Статистика формируется по конкретной странице таблицы, а не всему периоду" type="warning" show-icon :closable="false" />
   </div>
 </template>

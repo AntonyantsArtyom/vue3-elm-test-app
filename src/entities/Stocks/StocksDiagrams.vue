@@ -64,7 +64,7 @@ function pieOptions(title: string, data: { name: string; value: number }[]) {
       <VChart v-if="quantityData.length" class="chart" :option="pieOptions('на складе', quantityData)" autoresize />
       <VChart v-if="inWayData.length" class="chart" :option="pieOptions('в пути', inWayData)" autoresize />
     </div>
-    <el-alert title="Статистика формируется по конкретной странице таблицы, а не всему периоду" type="warning" show-icon />
+    <el-alert title="Статистика формируется по конкретной странице таблицы, а не всему периоду" type="warning" show-icon :closable="false" />
   </div>
 </template>
 

@@ -77,12 +77,24 @@ const chartOptions = computed(() => ({
 </script>
 
 <template>
-  <VChart v-if="ordersByHour.length" class="chart" :option="chartOptions" autoresize />
+  <div class="charts-grid">
+    <VChart v-if="ordersByHour.length" class="chart" :option="chartOptions" autoresize />
+    <el-alert title="Статистика формируется по конкретной странице таблицы, а не всему периоду" type="warning" show-icon :closable="false" />
+  </div>
 </template>
 
-<style scoped>
-.chart {
-  width: 100%;
-  height: 400px;
+<style scoped lang="scss">
+.charts-grid {
+  height: calc(100dvh - 210px);
+  display: flex;
+  flex-direction: column;
+
+  .el-alert {
+    margin-top: auto;
+  }
+
+  .chart {
+    height: 400px;
+  }
 }
 </style>

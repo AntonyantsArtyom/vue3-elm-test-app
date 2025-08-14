@@ -14,15 +14,6 @@ const props = defineProps<{
   sales: TSale[];
 }>();
 
-const salesCountByWarehouse = computed(() => {
-  const map = new Map<string, number>();
-  props.sales.forEach((s) => {
-    const name = s.warehouse_name || "Не указано";
-    map.set(name, (map.get(name) ?? 0) + 1);
-  });
-  return Array.from(map, ([name, value]) => ({ name, value }));
-});
-
 const salesSumByWarehouse = computed(() => {
   const map = new Map<string, number>();
   props.sales.forEach((s) => {
@@ -34,27 +25,14 @@ const salesSumByWarehouse = computed(() => {
   });
   return Array.from(map, ([name, value]) => ({ name, value }));
 });
-
-const salesSumByCountry = computed(() => {
-  const map = new Map<string, number>();
-  props.sales.forEach((s) => {
-    const name = s.country_name || "Не указано";
-    const price = Number(s.finished_price) || 0;
-    if (price > 0) {
-      map.set(name, (map.get(name) ?? 0) + price);
-    }
-  });
-  return Array.from(map, ([name, value]) => ({ name, value }));
-});
 </script>
 
 <template>
   <div class="charts-grid">
+    <span class="charts-title">Сумма продаж по складам</span>
     <el-scrollbar>
       <div class="charts">
-        <VChart v-if="salesCountByWarehouse.length" class="chart" :option="pieOptions('кол-во продаж по складам', salesCountByWarehouse)" autoresize />
-        <VChart v-if="salesSumByWarehouse.length" class="chart" :option="pieOptions('сумма продаж по складам', salesSumByWarehouse)" autoresize />
-        <VChart v-if="salesSumByCountry.length" class="chart" :option="pieOptions('сумма продаж по странам', salesSumByCountry)" autoresize />
+        <VChart v-if="salesSumByWarehouse.length" class="chart" :option="pieOptions(salesSumByWarehouse)" autoresize />
       </div>
     </el-scrollbar>
     <el-alert title="Статистика формируется по конкретной странице таблицы, а не всему периоду" type="warning" show-icon :closable="false" />
@@ -67,15 +45,22 @@ const salesSumByCountry = computed(() => {
   display: flex;
   flex-direction: column;
 
+  .charts-title {
+    margin: 0;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 18px;
+    color: var(--el-text-color-primary);
+  }
+
   .charts {
-    flex: 1;
     display: flex;
-    gap: 10px;
+    justify-content: center;
+    padding-bottom: 20px;
 
     .chart {
-      flex-shrink: 0;
-      width: 300px;
-      height: 350px;
+      width: 500px;
+      height: 300px;
     }
   }
 

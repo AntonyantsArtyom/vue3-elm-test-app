@@ -1,6 +1,5 @@
-export function pieOptions(title: string, data: { name: string; value: number }[]) {
+export function pieOptions(data: { name: string; value: number }[]) {
   return {
-    title: { text: title, left: "center" },
     tooltip: { trigger: "item" },
     legend: { bottom: 0 },
     series: [

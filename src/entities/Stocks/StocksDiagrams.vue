@@ -25,30 +25,17 @@ function getWarehouseData(field: keyof TStock) {
   return Array.from(map, ([name, value]) => ({ name, value }));
 }
 
-function getWarehouseDataInWay() {
-  const map = new Map<string, number>();
-  props.stocks.forEach((s) => {
-    const value = (Number(s.in_way_to_client) || 0) + (Number(s.in_way_from_client) || 0);
-    if (value > 0) {
-      map.set(s.warehouse_name, (map.get(s.warehouse_name) ?? 0) + value);
-    }
-  });
-  return Array.from(map, ([name, value]) => ({ name, value }));
-}
-
-const quantityData = computed(() => getWarehouseData("quantity"));
-const inWayData = computed(() => getWarehouseDataInWay());
 const quantityFullData = computed(() => getWarehouseData("quantity_full"));
 </script>
 
 <template>
   <div class="charts-grid">
+    <span class="charts-title">Полное количество продукции на складах</span>
     <el-scrollbar>
       <div class="charts">
-        <VChart v-if="quantityFullData.length" class="chart" :option="pieOptions('количество продукции', quantityFullData)" autoresize />
-        <VChart v-if="quantityData.length" class="chart" :option="pieOptions('на складе', quantityData)" autoresize />
-        <VChart v-if="inWayData.length" class="chart" :option="pieOptions('в пути', inWayData)" autoresize /></div
-    ></el-scrollbar>
+        <VChart v-if="quantityFullData.length" class="chart" :option="pieOptions(quantityFullData)" autoresize />
+      </div>
+    </el-scrollbar>
     <el-alert title="Статистика формируется по конкретной странице таблицы, а не всему периоду" type="warning" show-icon :closable="false" />
   </div>
 </template>
@@ -59,15 +46,22 @@ const quantityFullData = computed(() => getWarehouseData("quantity_full"));
   display: flex;
   flex-direction: column;
 
+  .charts-title {
+    margin: 0;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 18px;
+    color: var(--el-text-color-primary);
+  }
+
   .charts {
-    flex: 1;
     display: flex;
-    gap: 10px;
+    justify-content: center;
+    padding-bottom: 20px;
 
     .chart {
-      flex-shrink: 0;
-      width: 300px;
-      height: 350px;
+      width: 500px;
+      height: 300px;
     }
   }
 

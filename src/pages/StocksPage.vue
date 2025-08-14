@@ -8,6 +8,9 @@ import PaginationTemplate from "@/shared/components/PaginationTemplate.vue";
 import StocksDiagrams from "@/entities/Stocks/StocksDiagrams.vue";
 import { ElLoading } from "element-plus";
 import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+
+dayjs.extend(utc);
 
 const PAGE_SIZE = 40;
 
@@ -16,7 +19,12 @@ const total = ref<number>(0);
 const page = ref<number>(1);
 
 const filtersRef = ref<InstanceType<typeof FiltersTemplate>>();
-const today = dayjs().format("YYYY-MM-DD");
+
+//бэкенд блокирует запросы не за сегодняшний день
+//при этом работает на часовом поясе UTC+1, для
+//того чтобы синхронизировать дату с бэкендом
+//локальный часовой пояс приводится к UTC+1
+const today = dayjs().utc().add(1, "hour").format("YYYY-MM-DD");
 
 watch(
   [page],

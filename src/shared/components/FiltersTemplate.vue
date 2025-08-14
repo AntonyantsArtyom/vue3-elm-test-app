@@ -64,8 +64,8 @@ function onTypeChange(value: string) {
         </el-radio-group>
       </div>
     </div>
-    <slot v-if="date && date[0] && date[1]"></slot>
-    <div v-if="!(date && date[0] && date[1]) && !noDate" class="filters-message">
+    <slot v-if="(date && date[0] && date[1]) || noDate"></slot>
+    <div v-else class="filters-message">
       <Calendar class="filters-message-icon" />
       <h4 class="filters-message-title">установите временной период для отображения данных</h4>
     </div>
